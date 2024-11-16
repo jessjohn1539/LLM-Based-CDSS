@@ -131,27 +131,33 @@ class ReasonerAgent:
 st.title("LLM-Powered Clinical Decision Support System")
 
 # Input fields for the question and options
+# Input fields for the question and options
 question = st.text_area("Enter your clinical question:")
 options = {}
 for i in range(5):
     option_key = chr(65 + i)
     options[option_key] = st.text_input(f"Option {option_key}:")
 
-# Button to trigger the LLM call
+# Form validation
 if st.button("Generate Response"):
-    # Show a spinner while the LLM is generating the response
-    with st.spinner("Analyzing the question and options..."):
-        # Prepare the question data
-        question_data = {
-            "question": question,
-            "options": options
-        }
+    if not question.strip():
+        st.error("Please enter a clinical question.")
+    elif sum(1 for option in options.values() if option.strip()) < 4:
+        st.error("Please provide at least 4 options.")
+    else:
+        # Show a spinner while the LLM is generating the response
+        with st.spinner("Analyzing the question and options..."):
+            # Prepare the question data
+            question_data = {
+                "question": question,
+                "options": options
+            }
 
-        # Process the question with the multi-agent framework
-        result = process_question_with_agents(question_data)
+            # Process the question with the multi-agent framework
+            result = process_question_with_agents(question_data)
 
-        # Save the result for display
-        st.session_state.result = result
+            # Save the result for display
+            st.session_state.result = result
 
 # Display the full response if available
 if "result" in st.session_state:
