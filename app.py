@@ -171,7 +171,7 @@ if "result" in st.session_state:
 
     st.subheader("Probing Questions and Answers")
     for question, answer in result.get("Probing Questions and Answers", {}).items():
-        st.html(f"<p><span style='font-size: 20px; font-weight: bold; color: #de6464'>🔶 {question}</span></p>")
+        st.markdown(f"<p><span style='font-size: 20px; font-weight: bold; color: #de6464'>🔶 {question}</span></p>", unsafe_allow_html=True)
         st.write(answer)
 
     st.subheader("Final Assessment")
