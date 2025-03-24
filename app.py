@@ -128,7 +128,7 @@ class ReasonerAgent:
             return "No valid response generated."
 
 # Streamlit UI
-st.title("LLM-Powered Clinical Decision Support System")
+st.title("ArgMed-Agents: Explainable Clinical Decision Reasoning with LLM via Argumentation Schemes")
 
 # Input fields for the question and options
 # Input fields for the question and options
